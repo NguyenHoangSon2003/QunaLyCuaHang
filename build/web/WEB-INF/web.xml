@@ -24,6 +24,14 @@
         <servlet-name>themspmua</servlet-name>
         <servlet-class>funtion.themspmua</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>soluongspgh</servlet-name>
+        <servlet-class>funtion.soluongtanggiam</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>xoa_sp_trong_gh</servlet-name>
+        <servlet-class>funtion.xoa_sp_trong_gh</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>taikhoanDAO</servlet-name>
         <url-pattern>/taikhoanDAO</url-pattern>
@@ -47,5 +55,13 @@
     <servlet-mapping>
         <servlet-name>themspmua</servlet-name>
         <url-pattern>/add_to_card</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>soluongspgh</servlet-name>
+        <url-pattern>/soluong</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>xoa_sp_trong_gh</servlet-name>
+        <url-pattern>/xoa_spgh</url-pattern>
     </servlet-mapping>
 </web-app>

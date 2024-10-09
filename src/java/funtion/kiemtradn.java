@@ -44,36 +44,37 @@ public class kiemtradn extends HttpServlet {
         processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String tentk = request.getParameter("username");
+            String tentkdn = request.getParameter("username");
             String mk = request.getParameter("password");
             taikhoansv tksv = new taikhoansv();
             List<taikhoan> ds_taikhoan = new ArrayList<taikhoan>();
             ds_taikhoan = tksv.getAllTaiKhoan();
             String errorMessage = "";
             taikhoan tk = new taikhoan();
-            tk = tksv.timTK(tentk);
+            tk = tksv.timTK(tentkdn);
             for (taikhoan tk1 : ds_taikhoan) {
-                if (tentk.equals(tk1.getTentk())) {
-                    if (mk.equals(tk1.getMatkhau())) {
-                        if (tk.getTrangthai() == 1) {
+                if (tentkdn.equals(tk1.getTentk())) {
+                    if(mk.equals(tk1.getMatkhau())){
+                        if(tk1.getTrangthai() != 0){
+                            errorMessage = "";
                             break;
-                        } else {
-                            errorMessage = "Tài khoản đã bị khóa";
+                        }else{
+                            errorMessage = "Tài khoản bị khóa.";
                             break;
                         }
-                    } else {
-                        errorMessage = "Mật khẩu không đúng";
+                    }else{
+                        errorMessage = "Mật khẩu không đúng.";
                         break;
                     }
                 } else {
                     errorMessage = "Tên tài khoản không tồn tại.";
-                    break;
                 }
             }
+            out.print(errorMessage);
 
             if (!errorMessage.isEmpty()) {
                 // Store form data in request attributes
-                request.setAttribute("tentk", tentk);
+                request.setAttribute("tentk", tentkdn);
                 request.setAttribute("mktk", mk);
                 request.setAttribute("errorMessage", errorMessage);
                 request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
@@ -92,7 +93,6 @@ public class kiemtradn extends HttpServlet {
                 ss.setAttribute("ip", kt);
                 response.sendRedirect("index.jsp");
             }
-
         }
     }
 

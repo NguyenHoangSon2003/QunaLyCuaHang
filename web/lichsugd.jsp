@@ -25,10 +25,6 @@
             <li><a href="lichsugd.jsp">Lịch sử giao dịch</a></li>
         </ul>
     </nav>
-    <div class="search-container">
-        <input type="text" placeholder="Tìm kiếm...">
-        <button type="submit">Tìm</button>
-    </div>
     <div class="profile">
         <nav>
             <ul>
