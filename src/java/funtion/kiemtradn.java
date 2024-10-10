@@ -80,6 +80,7 @@ public class kiemtradn extends HttpServlet {
                 request.getRequestDispatcher("dangnhap.jsp").forward(request, response);
             } else {
                 HttpSession ss = request.getSession();
+                ss.setMaxInactiveInterval(10000);
                 String kt = "";
                 try {
                     InetAddress ip = InetAddress.getLocalHost();
