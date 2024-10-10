@@ -8,7 +8,7 @@
     DecimalFormat formatter = new DecimalFormat("#,###");
     request.setAttribute("formatter", formatter);
     HttpSession ss = request.getSession();
-    taikhoan tkss = (taikhoan) ss.getAttribute("taikhoan");
+    taikhoan tk = (taikhoan) ss.getAttribute("taikhoan");
     ArrayList<giohang> ds_gh = (ArrayList<giohang>) ss.getAttribute("ds_gh");
     List<giohang> gh_sp = null;
     if (ds_gh != null) {
@@ -41,22 +41,7 @@
     <body>
         <!-- nav -->
         <header>
-            <nav>
-                <ul class="dieuhuong">
-                    <li><a href="index.jsp">Trang chủ</a></li>
-                    <li><a href="sanpham.jsp">Sản phẩm</a></li>
-                    <li><a href="giohang.jsp">Giỏ hàng<span class="badge badge-danger text-danger px-1">${ds_gh.size()}</span></a></li>
-                    <li><a href="lichsugd.jsp">Lịch sử giao dịch</a></li>
-                </ul>
-            </nav>
-            <div class="profile">
-                <nav>
-                    <ul>
-                        <li><a href="#">Hồ sơ</a></li>
-                        <li><a href="dangnhap.jsp">Đăng xuất</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <%@include file="inc/nav.jsp" %>
         </header>
 
         <!-- than -->
