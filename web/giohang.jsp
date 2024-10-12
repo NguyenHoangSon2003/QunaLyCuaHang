@@ -6,7 +6,6 @@
          java.text.DecimalFormat" %>
 <%
     DecimalFormat formatter = new DecimalFormat("#,###");
-    request.setAttribute("formatter", formatter);
     HttpSession ss = request.getSession();
     taikhoan tk = (taikhoan) ss.getAttribute("taikhoan");
     ArrayList<giohang> ds_gh = (ArrayList<giohang>) ss.getAttribute("ds_gh");
@@ -17,7 +16,6 @@
         long gia = spsv.getTongGiaGH(ds_gh);
         request.setAttribute("gia", gia);
         request.setAttribute("ds_gh", ds_gh);
-        
     }
 %>
 <!DOCTYPE html>
@@ -27,15 +25,7 @@
         <link rel="stylesheet" href="css/giohang.css">
         <link rel="stylesheet" href="css/index.css">
         <title>Giỏ hàng</title>
-        <style type="text/css">
-            .table tbody td{
-                vertical-align: middle;
-            }
-            .btn-incre, .btn-decre{
-                box-shadow: none;
-                font-size: 25px;
-            }
-        </style>
+
     </head>
 
     <body>
@@ -46,7 +36,8 @@
 
         <!-- than -->
         <div class="container my-3">
-            <div class="d-flex py-3"><h3>Tổng giá: ${(gia>0)?formatter.format(gia):0} VND </h3> <a class="mx-3 btn btn-primary" href="cart-check-out">Kiểm tra lại</a></div>
+           
+            <div class="d-flex py-3"><h3>Tổng giá: ${(gia>0)?formatter.format(gia):0} VND </h3> <!--<a class="mx-3 btn btn-primary" href="cart-check-out">Kiểm tra lại</a>--> </div>
             <table class="table table-light">
                 <thead>
                     <tr>
@@ -70,7 +61,7 @@
                                 <input type="hidden" name="id" value="<%= c.getMasp()%>" class="form-input">
                                 <div class="form-group d-flex justify-content-between">
                                     <a class="btn bnt-sm btn-incre" href="soluong?action=inc&id=<%= c.getMasp()%>"><i class="fas fa-plus-square"></i></a> 
-                                    <input type="text" name="quantity" class="form-control"  value="<%=c.getSoluongsp()%>" readonly> 
+                                    <input type="text" name="soluong" class="form-control"  value="<%=c.getSoluongsp()%>" readonly> 
                                     <a class="btn btn-sm btn-decre" href="soluong?action=dec&id=<%= c.getMasp()%>"><i class="fas fa-minus-square"></i></a>
                                      <button type="submit" class="btn btn-primary btn-sm ">Mua</button>
                                 </div>

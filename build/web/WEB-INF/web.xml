@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <servlet-mapping>
+        <servlet-name>muasp</servlet-name>
+        <url-pattern>/mua</url-pattern>
+    </servlet-mapping>
     <session-config>
-    <session-timeout>30</session-timeout> </session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
     <servlet>
         <servlet-name>taikhoanDAO</servlet-name>
         <servlet-class>DAO.taikhoanDAO</servlet-class>
@@ -33,6 +38,10 @@
     <servlet>
         <servlet-name>xoa_sp_trong_gh</servlet-name>
         <servlet-class>funtion.xoa_sp_trong_gh</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>muasp</servlet-name>
+        <servlet-class>funtion.muasp</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>taikhoanDAO</servlet-name>

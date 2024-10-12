@@ -61,7 +61,7 @@
                             <h6 class="price">Giá: <%= formatter.format(sp.getGia()) %> VND</h6>
                             <div class="mt-3 d-flex justify-content-between">
                                 <a href="./add_to_card?id=<%= sp.getMasp()%>" class="btn btn-dark">Thêm vào giỏ hàng</a>
-                                <a href="./add_to_card" class="btn btn-primary">Mua Ngay</a>
+                                <a href="./mua?soluong=1&id=<%=sp.getMasp()%>" class="btn btn-primary">Mua Ngay</a>
                             </div>
                             <h5 style='color:crimson; text-align: center'></h5>
 
