@@ -20,6 +20,7 @@
             tk = (taikhoan) ss.getAttribute("taikhoan");
             if (tk != null){
             ss.setAttribute("taikhoan", tk);
+            
             String ip = (String) ss.getAttribute("ip");
             Date loginTime = (Date) session.getAttribute("loginTime");
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -43,6 +44,7 @@
         <div>
             <section>
                 <img src="img/trangchu.png" alt="" width="100%">
+                <img src="img/logo1.png" alt="" width="100%">
             </section>
         </div>
 

@@ -8,6 +8,9 @@
     DecimalFormat formatter = new DecimalFormat("#,###");
     HttpSession ss = request.getSession();
     taikhoan tk = (taikhoan) ss.getAttribute("taikhoan");
+        if (tk == null){
+            response.sendRedirect("dangnhap.jsp");
+        }
     ArrayList<giohang> ds_gh = (ArrayList<giohang>) ss.getAttribute("ds_gh");
     List<giohang> gh_sp = null;
     if (ds_gh != null) {
@@ -43,7 +46,7 @@
                         <th scope="col">Tên</th>
                         <th scope="col">Giá</th>
                         <th scope="col">Mua ngay</th>
-                        <th scope="col">Hủy</th>
+                        <th scope="col">Hủy</th>        
                     </tr>
                 </thead>
                 <tbody>
@@ -66,7 +69,9 @@
                                 </div>
                             </form>
                         </td>
+                                   
                         <td><a href="xoa_spgh?id=<%= c.getMasp()%>" class="btn btn-sm btn-danger">Xóa</a></td>
+                                
                     </tr>
                     <%
                         }}%>

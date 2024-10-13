@@ -5,6 +5,21 @@
          model.*, 
          sevice.*,
          java.text.DecimalFormat" %>
+<%
+               HttpSession ss = request.getSession();
+               taikhoan tk = (taikhoan) ss.getAttribute("taikhoan");
+               if (tk == null){
+                   response.sendRedirect("dangnhap.jsp");
+               }else{
+                   String ip = (String) ss.getAttribute("ip");
+                   Date loginTime = (Date) session.getAttribute("loginTime");
+                   SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                   String formattedTime = formatter.format(loginTime); 
+                   String username = tk.getTentk();
+                   ss.setAttribute("tentk", username);
+               }
+           
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,17 +31,7 @@
     </head>
 
     <body>
-        <%
-                HttpSession ss = request.getSession();
-                taikhoan tk = new taikhoan();
-                tk = (taikhoan) ss.getAttribute("taikhoan");
-                if (tk != null){
-                    String ip = (String) ss.getAttribute("ip");
-                    Date loginTime = (Date) session.getAttribute("loginTime");
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                    String formattedTime = formatter.format(loginTime); 
-                }
-        %>
+
         <header>
             <%@include file="inc/nav.jsp" %>
         </header>
@@ -47,7 +52,8 @@
                     <%
                     lichsugdsv lssv = new lichsugdsv();
                     sanphamsv spsv = new sanphamsv();
-                    List<lichsugd> ds_ls = lssv.getLSGD(tk.getTentk());
+                    String tentk = (String) ss.getAttribute("tentk");
+                    List<lichsugd> ds_ls = lssv.getLSGD(tentk);
                     
                     if(ds_ls != null){
                         for(lichsugd l : ds_ls){
@@ -65,7 +71,17 @@
                         <td><%=l.getSoluong()%></td>
                         <td> ${(gia>0)?formatter.format(gia):0} VND</td>
                         <td><%= tt%></td>
-                        <td><a class="btn btn-sm btn-danger" href="cancel-order?id=<%=l.getMals()%>">Hủy</a></td>
+                        <%    
+                            if(l.getTrangthai() == 1){ 
+                        %> 
+                            <td><a class="btn btn-sm btn-danger" href="cancel-order?id=<%=l.getMals()%>">Hủy</a></td>
+                        <%    
+                            }else{       
+                        %> 
+                        <td><a class="btn-danger" href=""></a></td>
+                        <%    
+                            }       
+                        %> 
                     </tr>
                     <%
                         }
