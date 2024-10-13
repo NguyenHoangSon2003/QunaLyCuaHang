@@ -9,7 +9,7 @@
 <html lang="en">
 
     <head>
-        <meta charset="UTF-8">
+        <%@include file="inc/head.jsp" %>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/index.css">
         <title>Document</title>
@@ -24,21 +24,57 @@
                     String ip = (String) ss.getAttribute("ip");
                     Date loginTime = (Date) session.getAttribute("loginTime");
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                    String formattedTime = formatter.format(loginTime);
-                    ArrayList<giohang> ds_gh = (ArrayList<giohang>) ss.getAttribute("ds_gh");
-                    List<giohang> gh_sp = null;
-                    if (ds_gh != null) {
-                        sanphamsv spsv = new sanphamsv();
-                        gh_sp = spsv.getGioHang(ds_gh);
-                        long gia = spsv.getTongGiaGH(ds_gh);
-                        request.setAttribute("gia", gia);
-                        request.setAttribute("ds_gh", ds_gh);
-                    }
+                    String formattedTime = formatter.format(loginTime); 
                 }
         %>
         <header>
             <%@include file="inc/nav.jsp" %>
         </header>
+        <div class="container">
+            <div class="card-header my-3">All Orders</div>
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Ngày</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Hủy đơn hàng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                    lichsugdsv lssv = new lichsugdsv();
+                    sanphamsv spsv = new sanphamsv();
+                    List<lichsugd> ds_ls = lssv.getLSGD(tk.getTentk());
+                    
+                    if(ds_ls != null){
+                        for(lichsugd l : ds_ls){
+                            DecimalFormat formatter = new DecimalFormat("#,###");
+                            String t = spsv.getTenSp(l.getMasp());
+                            String tt = "Đã xác nhận";
+                            if(l.getTrangthai() == 1){
+                                tt = "Chờ xác nhận";
+                            }
+                        
+                    %>
+                    <tr>
+                        <td><%= l.getDate()%></td>
+                        <td><%= t%></td>
+                        <td><%=l.getSoluong()%></td>
+                        <td> ${(gia>0)?formatter.format(gia):0} VND</td>
+                        <td><%= tt%></td>
+                        <td><a class="btn btn-sm btn-danger" href="cancel-order?id=<%=l.getMals()%>">Hủy</a></td>
+                    </tr>
+                    <%
+                        }
+                    }
+                    %>
+
+                </tbody>
+            </table>
+        </div>
 
     </body>
 

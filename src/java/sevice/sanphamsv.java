@@ -25,4 +25,8 @@ public class sanphamsv {
     public long getTongGiaGH(ArrayList<giohang> ds_gh) {
         return spDao.getTongGiaGH(ds_gh);
     }
+    
+    public String getTenSp(int ma) {
+        return spDao.getTenSp(ma);
+    }
 }

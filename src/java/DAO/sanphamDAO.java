@@ -23,7 +23,6 @@ public class sanphamDAO {
         String sql = "Select * from sanpham";
 
         try {
-
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -95,6 +94,30 @@ public class sanphamDAO {
         }
         return sum;
     }
+
+    public String getTenSp(int ma) {
+        Connection conn = JDBCConnection.getConnection();
+        String s = "null";
+        try {
+            String sql = "Select tensp from sanpham where masp =?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, ma);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                s = rs.getString("tensp");
+                JDBCConnection.closeConnection(conn);
+                return s;
+            } else {
+                JDBCConnection.closeConnection(conn);
+                return s;
+            }
+        }
+        catch (SQLException e) {
+                e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return s ;
+}
 
 //    public static void main(String[] args) {
 //        List<sanpham> ds_sp = getAllSanPham();

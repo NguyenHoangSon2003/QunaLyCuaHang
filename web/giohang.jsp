@@ -25,7 +25,6 @@
         <link rel="stylesheet" href="css/giohang.css">
         <link rel="stylesheet" href="css/index.css">
         <title>Giỏ hàng</title>
-
     </head>
 
     <body>
@@ -36,7 +35,7 @@
 
         <!-- than -->
         <div class="container my-3">
-           
+
             <div class="d-flex py-3"><h3>Tổng giá: ${(gia>0)?formatter.format(gia):0} VND </h3> <!--<a class="mx-3 btn btn-primary" href="cart-check-out">Kiểm tra lại</a>--> </div>
             <table class="table table-light">
                 <thead>
@@ -63,7 +62,7 @@
                                     <a class="btn bnt-sm btn-incre" href="soluong?action=inc&id=<%= c.getMasp()%>"><i class="fas fa-plus-square"></i></a> 
                                     <input type="text" name="soluong" class="form-control"  value="<%=c.getSoluongsp()%>" readonly> 
                                     <a class="btn btn-sm btn-decre" href="soluong?action=dec&id=<%= c.getMasp()%>"><i class="fas fa-minus-square"></i></a>
-                                     <button type="submit" class="btn btn-primary btn-sm ">Mua</button>
+                                    <button type="submit" class="btn btn-primary btn-sm ">Mua</button>
                                 </div>
                             </form>
                         </td>
