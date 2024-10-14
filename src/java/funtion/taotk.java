@@ -89,7 +89,7 @@ public class taotk extends HttpServlet {
                 request.getRequestDispatcher("dangky.jsp").forward(request, response);
             } else {
                 tksv.themTaiKhoan(tk);
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("dangnhap.jsp");
             }
         }
     }

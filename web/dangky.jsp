@@ -50,7 +50,7 @@
                     <button type="reset">Xóa</button>
                 </div>
             </form>
-            <p>Quay lại đăng nhập? <a href="index.jsp">Đăng nhập</a></p>
+            <p>Quay lại đăng nhập? <a href="dangnhap.jsp">Đăng nhập</a></p>
         </div>
         <script src="js/dangky.js"></script>
     </body>

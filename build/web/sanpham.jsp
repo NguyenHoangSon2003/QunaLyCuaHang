@@ -1,10 +1,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.util.Date, 
+<%@ page import=" java.util.*, 
          java.text.SimpleDateFormat, 
          model.*, 
          sevice.*,
-         java.util.List" %>
+         java.text.DecimalFormat" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,48 +24,21 @@
             Date loginTime = (Date) session.getAttribute("loginTime");
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             String formattedTime = formatter.format(loginTime);
+            ArrayList<giohang> ds_gh = (ArrayList<giohang>) ss.getAttribute("ds_gh");
+            List<giohang> gh_sp = null;
+            if (ds_gh != null) {
+                sanphamsv spsv = new sanphamsv();
+                gh_sp = spsv.getGioHang(ds_gh);
+                long gia = spsv.getTongGiaGH(ds_gh);
+                request.setAttribute("gia", gia);
+                request.setAttribute("ds_gh", ds_gh);
+            }
             }
         %>
         <header>
-            <nav>
-                <ul class="dieuhuong">
-                    <li><a href="index.jsp">Trang chủ</a></li>
-                    <li><a href="sanpham.jsp">Sản phẩm</a></li>
-                        <%
-                            if(tk != null){
-                        %>
-                    <li><a href="giohang.jsp">Giỏ hàng</a></li>
-                    <li><a href="lichsugd.jsp">Lịch sử giao dịch</a></li>
-                        <%
-                            }
-                        %>
-                </ul>
-            </nav>
-            <div class="profile">
-                <%
-                     if(tk == null){
-                %>
-                <nav>
-                    <ul>
-                        <li><a href="#">Hồ sơ</a></li>
-                        <li><a href="dangnhap.jsp">Đăng nhập</a></li>
-                    </ul>
-                </nav>
-                <%
-                    }else{
-                %>
-                <nav>
-                    <ul>
-                        <li><a href="#">Hồ sơ</a></li>
-                        <li><a href="dx">Đăng xuất</a></li>
-                    </ul>
-                </nav>
-                <%
-                    }
-                %>
-            </div>
+            <%@include file="inc/nav.jsp" %>
         </header>
-        
+
         <div class="container">
             <div class="card-header my-3">Tất cả sản phẩm </div>
             <hr class="border border-danger border-2 opacity-50">
@@ -75,6 +48,7 @@
                     List<sanpham> ds_sp = spsv.getAllSanPham();
                     if( !ds_sp.isEmpty()){
                         for(sanpham sp : ds_sp){
+                        DecimalFormat formatter = new DecimalFormat("#,###");
                 %>  
                 <div class="col-md-3">
                     <div class="card w-100" style="width: 18rem;">
@@ -82,14 +56,14 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= sp.getTensp() %></h5>
                             <h6 class="price">Bộ nhớ: <%= sp.getRam()%>GB/<%= sp.getRom()%>GB </h6>
-                            <h6 class="price">Pin: <%= sp.getPin() %></h6>
-                            <h6 class="price">Màn hình: <%= sp.getManhinh() %></h6>
-                            <h6 class="price">Giá: <%= sp.getGia() %></h6>
-                            <h6 class="price">SL: <%= sp.getSoluong() %></h6>
+                            <h6 class="price">Pin: <%= sp.getPin() %> mAh</h6>
+                            <h6 class="price">Màn hình: <%= sp.getManhinh() %> Inch</h6>
+                            <h6 class="price">Giá: <%= formatter.format(sp.getGia()) %> VND</h6>
                             <div class="mt-3 d-flex justify-content-between">
-                                <a href="./add_to_card" class="btn btn-dark">Thêm vào giỏ hàng</a>
-                                <a href="./add_to_card" class="btn btn-primary">Mua Ngay</a>
+                                <a href="./add_to_card?id=<%= sp.getMasp()%>" class="btn btn-dark">Thêm vào giỏ hàng</a>
+                                <a href="./mua?soluong=1&id=<%=sp.getMasp()%>" class="btn btn-primary">Mua Ngay</a>
                             </div>
+                            <h5 style='color:crimson; text-align: center'></h5>
 
                         </div>
                     </div>

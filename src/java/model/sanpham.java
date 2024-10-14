@@ -8,12 +8,12 @@ public class sanpham {
     private int ram, rom, pin;
     private double manhinh;
     private String anh;
-    private int gia, soluong;
+    private long gia;
 
     public sanpham() {
     }
 
-    public sanpham(int masp, String tensp, int ram, int rom, int pin, double manhinh, String anh, int gia, int soluong) {
+    public sanpham(int masp, String tensp, int ram, int rom, int pin, double manhinh, String anh, long gia) {
         this.masp = masp;
         this.tensp = tensp;
         this.ram = ram;
@@ -22,7 +22,6 @@ public class sanpham {
         this.manhinh = manhinh;
         this.anh = anh;
         this.gia = gia;
-        this.soluong = soluong;
     }
 
     public int getMasp() {
@@ -81,25 +80,18 @@ public class sanpham {
         this.anh = anh;
     }
 
-    public int getGia() {
+    public long getGia() {
         return gia;
     }
 
-    public void setGia(int gia) {
+    public void setGia(long gia) {
         this.gia = gia;
     }
 
-    public int getSoluong() {
-        return soluong;
-    }
-
-    public void setSoluong(int soluong) {
-        this.soluong = soluong;
-    }
 
     @Override
     public String toString() {
-        return "sanpham{" + "masp=" + masp + ", tensp=" + tensp + ", ram=" + ram + ", rom=" + rom + ", pin=" + pin + ", manhinh=" + manhinh + ", anh=" + anh + ", gia=" + gia + ", soluong=" + soluong + '}';
+        return "sanpham{" + "masp=" + masp + ", tensp=" + tensp + ", ram=" + ram + ", rom=" + rom + ", pin=" + pin + ", manhinh=" + manhinh + ", anh=" + anh + ", gia=" + gia + ", soluong=" + '}';
     }
    
 }

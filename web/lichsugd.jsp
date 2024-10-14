@@ -1,44 +1,97 @@
-<%-- 
-    Document   : lichsugd
-    Created on : Oct 7, 2024, 1:38:41 PM
-    Author     : hson9
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import=" java.util.*, 
+         java.text.SimpleDateFormat, 
+         model.*, 
+         sevice.*,
+         java.text.DecimalFormat" %>
+<%
+               HttpSession ss = request.getSession();
+               taikhoan tk = (taikhoan) ss.getAttribute("taikhoan");
+               if (tk == null){
+                   response.sendRedirect("dangnhap.jsp");
+               }else{
+                   String ip = (String) ss.getAttribute("ip");
+                   Date loginTime = (Date) session.getAttribute("loginTime");
+                   SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                   String formattedTime = formatter.format(loginTime); 
+                   String username = tk.getTentk();
+                   ss.setAttribute("tentk", username);
+               }
+           
+%>
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
-    <title>Document</title>
-</head>
+    <head>
+        <%@include file="inc/head.jsp" %>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/index.css">
+        <title>Document</title>
+    </head>
 
-<body>
-    <header>
-    <nav>
-        <ul class="dieuhuong">
-            <li><a href="index.jsp">Trang chủ</a></li>
-            <li><a href="sanpham.jsp">Sản phẩm</a></li>
-            <li><a href="giohang.jsp">Giỏ hàng</a></li>
-            <li><a href="lichsugd.jsp">Lịch sử giao dịch</a></li>
-        </ul>
-    </nav>
-    <div class="search-container">
-        <input type="text" placeholder="Tìm kiếm...">
-        <button type="submit">Tìm</button>
-    </div>
-    <div class="profile">
-        <nav>
-            <ul>
-                <li><a href="#">Hồ sơ</a></li>
-                <li><a href="dx">Đăng xuất</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+    <body>
 
-</body>
+        <header>
+            <%@include file="inc/nav.jsp" %>
+        </header>
+        <div class="container">
+            <div class="card-header my-3">All Orders</div>
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Ngày</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Hủy đơn hàng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                    lichsugdsv lssv = new lichsugdsv();
+                    sanphamsv spsv = new sanphamsv();
+                    String tentk = (String) ss.getAttribute("tentk");
+                    List<lichsugd> ds_ls = lssv.getLSGD(tentk);
+                    
+                    if(ds_ls != null){
+                        for(lichsugd l : ds_ls){
+                            DecimalFormat formatter = new DecimalFormat("#,###");
+                            String t = spsv.getTenSp(l.getMasp());
+                            String tt = "Đã xác nhận";
+                            if(l.getTrangthai() == 1){
+                                tt = "Chờ xác nhận";
+                            }
+                        
+                    %>
+                    <tr>
+                        <td><%= l.getDate()%></td>
+                        <td><%= t%></td>
+                        <td><%=l.getSoluong()%></td>
+                        <td> ${(gia>0)?formatter.format(gia):0} VND</td>
+                        <td><%= tt%></td>
+                        <%    
+                            if(l.getTrangthai() == 1){ 
+                        %> 
+                            <td><a class="btn btn-sm btn-danger" href="cancel-order?id=<%=l.getMals()%>">Hủy</a></td>
+                        <%    
+                            }else{       
+                        %> 
+                        <td><a class="btn-danger" href=""></a></td>
+                        <%    
+                            }       
+                        %> 
+                    </tr>
+                    <%
+                        }
+                    }
+                    %>
+
+                </tbody>
+            </table>
+        </div>
+
+    </body>
 
 </html>
