@@ -74,7 +74,7 @@
                         <%    
                             if(l.getTrangthai() == 1){ 
                         %> 
-                            <td><a class="btn btn-sm btn-danger" href="cancel-order?id=<%=l.getMals()%>">Hủy</a></td>
+                        <td><a class="btn btn-sm btn-danger" onclick="return confirm('Bạn có đồng ý hủy đơn hàng này không');" href="huydh?id=<%=l.getMals()%>">Hủy</a></td>
                         <%    
                             }else{       
                         %> 

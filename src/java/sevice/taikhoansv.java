@@ -25,4 +25,7 @@ public class taikhoansv {
         return tkDao.timTK(tentk);
     }
     
+    public void suaTaikhoan(taikhoan tk) {
+        tkDao.suaTaikhoan(tk);
+    }
 }

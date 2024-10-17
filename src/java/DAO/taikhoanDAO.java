@@ -92,4 +92,25 @@ public class taikhoanDAO {
             return null; // Hoặc xử lý ngoại lệ
         }
     }
+    
+    public void suaTaikhoan(taikhoan tk) {
+        Connection conn = JDBCConnection.getConnection();
+
+        String sql = "UPDATE `taikhoan` SET `hoten`=?,`diachi`=?,`sdt`=? WHERE taikhoan.tentk = ?";
+        int rs = 0;
+
+        try {
+            PreparedStatement pst = conn.prepareStatement(sql);
+            
+            pst.setString(4, tk.getTentk());
+            pst.setString(1, tk.getHoten());
+            pst.setString(2, tk.getDiachi());
+            pst.setString(3, tk.getSdt());
+            rs = pst.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(taikhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JDBCConnection.closeConnection(conn); /////////////////DONG KET NOI
+    }
 }

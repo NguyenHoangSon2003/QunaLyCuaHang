@@ -34,6 +34,7 @@ public class dangxuat extends HttpServlet {
             if (tk != null) {
                 ss.removeAttribute("taikhoan");
                 ss.removeAttribute("tentk");
+                ss.removeAttribute("ds_gh");
                 response.sendRedirect("index.jsp");
             }
         }

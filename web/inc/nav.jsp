@@ -19,7 +19,6 @@
     %>
     <nav>
         <ul>
-            <li><a href="#">Hồ sơ</a></li>
             <li><a href="dangnhap.jsp">Đăng nhập</a></li>
         </ul>
     </nav>
@@ -28,8 +27,8 @@
     %>
     <nav>
         <ul>
-            <li><a href="#">Hồ sơ</a></li>
-            <li><a href="dx">Đăng xuất</a></li>
+            <li><a href="thongtin.jsp">Hồ sơ</a></li>
+            <li><a onclick="return confirm('Bạn có muốn đăng xuất không');" href="dx">Đăng xuất</a></li>
         </ul>
     </nav>
     <%

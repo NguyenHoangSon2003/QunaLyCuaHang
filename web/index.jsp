@@ -44,7 +44,6 @@
         <div>
             <section>
                 <img src="img/trangchu.png" alt="" width="100%">
-                <img src="img/logo1.png" alt="" width="100%">
             </section>
         </div>
 
