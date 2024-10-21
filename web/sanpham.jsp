@@ -16,15 +16,14 @@
 
     <body>
         <%
-            HttpSession ss = request.getSession();
             taikhoan tk = new taikhoan();
-            tk = (taikhoan) ss.getAttribute("taikhoan");
+            tk = (taikhoan) session.getAttribute("taikhoan");
             if (tk != null){
-            String ip = (String) ss.getAttribute("ip");
+            String ip = (String) session.getAttribute("ip");
             Date loginTime = (Date) session.getAttribute("loginTime");
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             String formattedTime = formatter.format(loginTime);
-            ArrayList<giohang> ds_gh = (ArrayList<giohang>) ss.getAttribute("ds_gh");
+            ArrayList<giohang> ds_gh = (ArrayList<giohang>) session.getAttribute("ds_gh");
             List<giohang> gh_sp = null;
             if (ds_gh != null) {
                 sanphamsv spsv = new sanphamsv();

@@ -6,17 +6,16 @@
          sevice.*,
          java.text.DecimalFormat" %>
 <%
-               HttpSession ss = request.getSession();
-               taikhoan tk = (taikhoan) ss.getAttribute("taikhoan");
+               taikhoan tk = (taikhoan) session.getAttribute("taikhoan");
                if (tk == null){
                    response.sendRedirect("dangnhap.jsp");
                }else{
-                   String ip = (String) ss.getAttribute("ip");
+                   String ip = (String) session.getAttribute("ip");
                    Date loginTime = (Date) session.getAttribute("loginTime");
                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                    String formattedTime = formatter.format(loginTime); 
                    String username = tk.getTentk();
-                   ss.setAttribute("tentk", username);
+                   session.setAttribute("tentk", username);
                }
            
 %>
@@ -52,7 +51,7 @@
                     <%
                     lichsugdsv lssv = new lichsugdsv();
                     sanphamsv spsv = new sanphamsv();
-                    String tentk = (String) ss.getAttribute("tentk");
+                    String tentk = (String) session.getAttribute("tentk");
                     List<lichsugd> ds_ls = lssv.getLSGD(tentk);
                     
                     if(ds_ls != null){

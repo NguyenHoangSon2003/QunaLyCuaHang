@@ -4,6 +4,10 @@
         <servlet-name>huydonhang</servlet-name>
         <servlet-class>funtion.huydonhang</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>doimatkhau</servlet-name>
+        <servlet-class>funtion.doimatkhau</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>muasp</servlet-name>
         <url-pattern>/mua</url-pattern>
@@ -11,6 +15,10 @@
     <servlet-mapping>
         <servlet-name>huydonhang</servlet-name>
         <url-pattern>/huydh</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doimatkhau</servlet-name>
+        <url-pattern>/doimk</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -1,9 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date, java.text.SimpleDateFormat, model.taikhoan" %>
         <%
-            HttpSession ss = request.getSession();
             taikhoan tk = new taikhoan();
-            tk = (taikhoan) ss.getAttribute("taikhoan");
+            tk = (taikhoan) session.getAttribute("taikhoan");
             if (tk != null){
                 response.sendRedirect("index.jsp");
             }

@@ -6,12 +6,11 @@
          java.text.DecimalFormat" %>
 <%
     DecimalFormat formatter = new DecimalFormat("#,###");
-    HttpSession ss = request.getSession();
-    taikhoan tk = (taikhoan) ss.getAttribute("taikhoan");
+    taikhoan tk = (taikhoan) session.getAttribute("taikhoan");
         if (tk == null){
             response.sendRedirect("dangnhap.jsp");
         }
-    ArrayList<giohang> ds_gh = (ArrayList<giohang>) ss.getAttribute("ds_gh");
+    ArrayList<giohang> ds_gh = (ArrayList<giohang>) session.getAttribute("ds_gh");
     List<giohang> gh_sp = null;
     if (ds_gh != null) {
         sanphamsv spsv = new sanphamsv();
@@ -45,7 +44,7 @@
                     <tr>
                         <th scope="col">Tên</th>
                         <th scope="col">Giá</th>
-                        <th scope="col">Mua ngay</th>
+                        <th scope="col">Số lượng</th>
                         <th scope="col">Hủy</th>        
                     </tr>
                 </thead>
